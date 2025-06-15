@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de MRUA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .road {
+            width: 90%;
+            height: 10px;
+            background-color: gray;
+            margin: 20px auto;
+            position: relative;
+        }
+        .car {
+            width: 40px;
+            height: 20px;
+            background-color: blue;
+            border-radius: 5px;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            transition: none;
+        }
+        .arrow {
+            font-size: 24px;
+            position: absolute;
+            top: -40px;
+            left: 10px;
+            display: none;
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .ruler {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 10px auto;
+            font-size: 14px;
+        }
+        .volver {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        h3 {
+            font-size: 30px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <button class="volver" onclick="location.href='index.html'">VOLVER</button>
+    <h1>Simulador de MRUA</h1>
+    <p>Ingrese 3 variables para calcular la cuarta usando el botón Calcular, luego inicie la simulación.</p>
+    <h3> IMPORTANTE: Estamos obviando que la velocidad inicial = 0 </h3>
+    <div class="container">
+        <label for="aceleracion">Aceleración (m/s²):</label>
+        <input type="number" id="aceleracion" min="0">
+        <label for="distancia">Distancia (m):</label>
+        <input type="number" id="distancia" min="0">
+        <label for="tiempo">Tiempo (s):</label>
+        <input type="number" id="tiempo" min="0">
+        <label for="velocidadFinal">Velocidad Final (m/s):</label>
+        <input type="number" id="velocidadFinal" min="0">
+        <div class="buttons">
+            <button onclick="calcularMRUA()">Calcular</button>
+            <button onclick="simular()">Iniciar Simulación</button>
+            <button onclick="reiniciar()">Reiniciar</button>
+        </div>
+    </div>
+    <div class="road">
+        <div class="car" id="carro"></div>
+        <div class="arrow" id="flecha">➡️</div>
+    </div>
+    <div class="ruler" id="regla"></div>
+    <div class="info">
+        <p>Ecuaciones del MRUA: <strong>v_f = a × t</strong> y <strong>d = 0.5 × a × t²</strong></p>
+        <p>Aceleración actual: <span id="aceleracionActual">0</span> m/s²</p>
+        <p>Velocidad Final: <span id="velocidadActual">0</span> m/s</p>
+        <p>Distancia recorrida: <span id="distanciaRecorrida">0</span> m</p>
+    </div>
+    <script>
+        function calcularMRUA() {
+            let a = parseFloat(document.getElementById("aceleracion").value);
+            let d = parseFloat(document.getElementById("distancia").value);
+            let t = parseFloat(document.getElementById("tiempo").value);
+            let vf = parseFloat(document.getElementById("velocidadFinal").value);
+
+            if (!isNaN(a) && !isNaN(t) && isNaN(vf) && isNaN(d)) {
+                document.getElementById("velocidadFinal").value = (a * t).toFixed(2);
+                document.getElementById("distancia").value = (0.5 * a * t * t).toFixed(2);
+            } else if (!isNaN(a) && !isNaN(d) && isNaN(t) && isNaN(vf)) {
+                document.getElementById("tiempo").value = Math.sqrt((2 * d) / a).toFixed(2);
+                document.getElementById("velocidadFinal").value = (a * Math.sqrt((2 * d) / a)).toFixed(2);
+            } else if (!isNaN(d) && !isNaN(t) && isNaN(a) && isNaN(vf)) {
+                document.getElementById("aceleracion").value = (2 * d) / (t * t).toFixed(2);
+                document.getElementById("velocidadFinal").value = ((2 * d) / t).toFixed(2);
+            } else {
+                alert("Ingrese exactamente tres valores para calcular el cuarto.");
+            }
+        }
+
+        function simular() {
+            let a = parseFloat(document.getElementById("aceleracion").value);
+            let d = parseFloat(document.getElementById("distancia").value);
+            let t = parseFloat(document.getElementById("tiempo").value);
+
+            if (isNaN(a) || isNaN(d) || isNaN(t) || a <= 0 || d <= 0 || t <= 0) {
+                alert("Por favor, ingrese valores válidos.");
+                return;
+            }
+
+            document.getElementById("aceleracionActual").textContent = a.toFixed(2);
+            document.getElementById("velocidadActual").textContent = (a * t).toFixed(2);
+            document.getElementById("distanciaRecorrida").textContent = d;
+            actualizarRegla(d);
+
+            let carro = document.getElementById("carro");
+            let roadWidth = document.querySelector(".road").offsetWidth;
+            let maxLeft = roadWidth - carro.offsetWidth;
+
+            carro.style.transition = `left ${t}s ease-in`;
+            carro.style.left = `${maxLeft}px`;
+        }
+
+        function actualizarRegla(distancia) {
+            let regla = document.getElementById("regla");
+            regla.innerHTML = "";
+            let incremento = Math.ceil(distancia / 10) * 10 / 10;
+            for (let i = 0; i <= distancia; i += incremento) {
+                let span = document.createElement("span");
+                span.textContent = i;
+                regla.appendChild(span);
+            }
+        }
+    </script>
+</body>
+</html>
