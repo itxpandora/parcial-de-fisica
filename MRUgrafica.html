@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador MRU</title>
+    <title>Grafica MRU - MIR</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,12 +11,14 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: #333;
             color: white;
             padding: 10px 0;
             text-align: center;
         }
+
         .container {
             margin: 20px auto;
             padding: 20px;
@@ -26,11 +28,13 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             font-size: 16px;
         }
+
         input {
             width: calc(100% - 20px);
             padding: 10px;
@@ -40,6 +44,7 @@
             border-radius: 4px;
             background-color: #f9f9f9;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -50,39 +55,45 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
+
         canvas {
             display: block;
             margin: 20px auto;
             border: 1px solid #000;
             background-color: #fff;
         }
+
         .results {
             text-align: center;
             font-size: 18px;
             font-weight: bold;
             margin-top: 20px;
         }
-        #volver {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
-        
+        .volver {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 74px;
+            font-size: 13px;
+        }
+
+        .volver:hover{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
-    <button id="volver" onclick="location.href='index.html'">VOLVER</button>
+    <button class="volver" onclick="location.href='index.html'">VOLVER</button>
     <header>
-        <br>
         <h1>Simulador de Movimiento Rectilíneo Uniforme (MRU)</h1>
     </header>
 
