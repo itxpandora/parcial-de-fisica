@@ -1,2 +1,2 @@
 # parcial-de-fisica
-Parcial de Fisica con Almir
+Parcial de Fisica con Almir Peladin
