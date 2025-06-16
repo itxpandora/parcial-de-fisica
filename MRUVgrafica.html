@@ -3,117 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="">
     <title>Grafica MRUV - MIR</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        #inputs {
-            margin: 20px auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 500px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #inputs label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        #inputs input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 15px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-
-        #inputs button {
-            width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #inputs button:hover {
-            background-color: #45a049;
-        }
-
-        canvas {
-            display: block;
-            margin: 20px auto;
-            border: 1px solid #000;
-            background-color: #fff;
-        }
-
-        #results {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .volver {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 5px 10px;
-            background-color: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-            width: 74px;
-            font-size: 13px;
-        }
-
-        @media (max-width: 600px) {
-            #inputs {
-                width: 90%;
-            }
-
-            #inputs label,
-            #inputs input,
-            #inputs button {
-                font-size: 14px;
-            }
-        }
-    </style>
 </head>
 <body>
     <button class="volver" onclick="location.href='index.html'">VOLVER</button>
     <header>
-        <h1>Simulador de Movimiento Rectilíneo Uniformemente Variado (MRUV)</h1>
+        <h2>Simulador de Movimiento Rectilíneo Uniformemente Variado (MRUV)</h2>
     </header>
 
-    <div id="inputs">
+    <div class="container">
         <label for="velocidadInicial">Velocidad Inicial (m/s):</label>
+        <br>
         <input type="number" id="velocidadInicial" step="0.1"><br>
 
         <label for="aceleracion">Aceleración (m/s²):</label>
+        <br>
         <input type="number" id="aceleracion" step="0.1"><br>
 
         <label for="tiempo">Tiempo (s):</label>
+        <br>
         <input type="number" id="tiempo" step="0.1"><br>
 
         <button onclick="simularMRUA()">Simular</button>

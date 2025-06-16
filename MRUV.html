@@ -11,7 +11,8 @@
     <button class="volver" onclick="location.href='index.html'">VOLVER</button>
     <h1>Simulador de MRUA</h1>
     <p>Ingrese 3 variables para calcular la cuarta usando el botón Calcular, luego inicie la simulación.</p>
-    <h3> IMPORTANTE: Estamos obviando que la velocidad inicial = 0 </h3>
+    <h3>IMPORTANTE: Estamos obviando que la velocidad inicial = 0</h3>
+
     <div class="container">
         <br>
         <label for="aceleracion">Aceleración (m/s²):</label>
@@ -35,17 +36,21 @@
             <button onclick="reiniciar()">Reiniciar</button>
         </div>
     </div>
+
     <div class="road">
         <div class="car" id="carro"></div>
         <div class="arrow" id="flecha">➡️</div>
     </div>
+
     <div class="ruler" id="regla"></div>
+
     <div class="info">
         <p>Ecuaciones del MRUA: <strong>v_f = a × t</strong> y <strong>d = 0.5 × a × t²</strong></p>
         <p>Aceleración actual: <span id="aceleracionActual">0</span> m/s²</p>
         <p>Velocidad Final: <span id="velocidadActual">0</span> m/s</p>
         <p>Distancia recorrida: <span id="distanciaRecorrida">0</span> m</p>
     </div>
+
     <script>
         function calcularMRUA() {
             let a = parseFloat(document.getElementById("aceleracion").value);
@@ -53,17 +58,55 @@
             let t = parseFloat(document.getElementById("tiempo").value);
             let vf = parseFloat(document.getElementById("velocidadFinal").value);
 
-            if (!isNaN(a) && !isNaN(t) && isNaN(vf) && isNaN(d)) {
-                document.getElementById("velocidadFinal").value = (a * t).toFixed(2);
-                document.getElementById("distancia").value = (0.5 * a * t * t).toFixed(2);
-            } else if (!isNaN(a) && !isNaN(d) && isNaN(t) && isNaN(vf)) {
-                document.getElementById("tiempo").value = Math.sqrt((2 * d) / a).toFixed(2);
-                document.getElementById("velocidadFinal").value = (a * Math.sqrt((2 * d) / a)).toFixed(2);
-            } else if (!isNaN(d) && !isNaN(t) && isNaN(a) && isNaN(vf)) {
-                document.getElementById("aceleracion").value = (2 * d) / (t * t).toFixed(2);
-                document.getElementById("velocidadFinal").value = ((2 * d) / t).toFixed(2);
-            } else {
+            let valoresIngresados = [!isNaN(a), !isNaN(d), !isNaN(t), !isNaN(vf)].filter(v => v).length;
+
+            if (valoresIngresados !== 3) {
                 alert("Ingrese exactamente tres valores para calcular el cuarto.");
+                return;
+            }
+
+            if (isNaN(vf)) {
+                if (!isNaN(a) && !isNaN(t)) {
+                    vf = a * t;
+                } else if (!isNaN(a) && !isNaN(d)) {
+                    vf = Math.sqrt(2 * a * d);
+                } else if (!isNaN(d) && !isNaN(t)) {
+                    vf = (2 * d) / t;
+                }
+                document.getElementById("velocidadFinal").value = vf.toFixed(2);
+            }
+
+            if (isNaN(a)) {
+                if (!isNaN(vf) && !isNaN(t)) {
+                    a = vf / t;
+                } else if (!isNaN(d) && !isNaN(t)) {
+                    a = (2 * d) / (t * t);
+                } else if (!isNaN(vf) && !isNaN(d)) {
+                    a = (vf * vf) / (2 * d);
+                }
+                document.getElementById("aceleracion").value = a.toFixed(2);
+            }
+
+            if (isNaN(t)) {
+                if (!isNaN(vf) && !isNaN(a)) {
+                    t = vf / a;
+                } else if (!isNaN(d) && !isNaN(a)) {
+                    t = Math.sqrt((2 * d) / a);
+                } else if (!isNaN(d) && !isNaN(vf)) {
+                    t = (2 * d) / vf;
+                }
+                document.getElementById("tiempo").value = t.toFixed(2);
+            }
+
+            if (isNaN(d)) {
+                if (!isNaN(a) && !isNaN(t)) {
+                    d = 0.5 * a * t * t;
+                } else if (!isNaN(vf) && !isNaN(t)) {
+                    d = 0.5 * vf * t;
+                } else if (!isNaN(vf) && !isNaN(a)) {
+                    d = (vf * vf) / (2 * a);
+                }
+                document.getElementById("distancia").value = d.toFixed(2);
             }
         }
 
@@ -80,6 +123,7 @@
             document.getElementById("aceleracionActual").textContent = a.toFixed(2);
             document.getElementById("velocidadActual").textContent = (a * t).toFixed(2);
             document.getElementById("distanciaRecorrida").textContent = d;
+
             actualizarRegla(d);
 
             let carro = document.getElementById("carro");
@@ -99,6 +143,19 @@
                 span.textContent = i;
                 regla.appendChild(span);
             }
+        }
+
+        function reiniciar() {
+            document.getElementById("aceleracion").value = "";
+            document.getElementById("distancia").value = "";
+            document.getElementById("tiempo").value = "";
+            document.getElementById("velocidadFinal").value = "";
+            document.getElementById("aceleracionActual").textContent = "0";
+            document.getElementById("velocidadActual").textContent = "0";
+            document.getElementById("distanciaRecorrida").textContent = "0";
+            document.getElementById("carro").style.transition = "none";
+            document.getElementById("carro").style.left = "0";
+            document.getElementById("regla").innerHTML = "";
         }
     </script>
 </body>
