@@ -16,24 +16,24 @@
     <div class="container">
         <label for="posicionInicial">Posición Inicial (m):</label>
         <br>
-        <input type="number" id="posicionInicial" step="0.1"><br>
+        <input class="int_inputs" type="number" id="posicionInicial" step="0.1"><br>
 
         <label for="velocidadInicial">Velocidad Inicial (m/s):</label>
         <br>
-        <input type="number" id="velocidadInicial" step="0.1"><br>
+        <input class="int_inputs" type="number" id="velocidadInicial" step="0.1"><br>
 
         <label for="aceleracion">Aceleración (m/s²):</label>
         <br>
-        <input type="number" id="aceleracion" step="0.1"><br>
+        <input class="int_inputs" type="number" id="aceleracion" step="0.1"><br>
 
         <label for="tiempo">Tiempo (s):</label>
         <br>
-        <input type="number" id="tiempo" step="0.1"><br>
+        <input class="int_inputs" type="number" id="tiempo" step="0.1"><br>
 
         <button onclick="simularMRV()">Simular</button>
     </div>
 
-    <canvas id="grafico" width="800" height="400"></canvas>
+    <canvas id="grafico" class="grafico" width="800" height="400"></canvas>
     <div id="results"></div>
 
     <script>

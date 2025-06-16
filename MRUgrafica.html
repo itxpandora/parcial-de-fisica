@@ -16,29 +16,29 @@
     <div class="container">
         <label for="velocidad">Velocidad (m/s):</label>
         <br>
-        <input type="number" id="velocidad" step="0.1"><br>
+        <input class="int_inputs" type="number" id="velocidad" step="0.1"><br>
 
         <label for="tiempo">Tiempo (s):</label>
         <br>
-        <input type="number" id="tiempo" step="0.1"><br>
+        <input class="int_inputs" type="number" id="tiempo" step="0.1"><br>
 
         <button onclick="simularMRU('grafico1', 'velocidad', 'tiempo', 'Distancia (m)')">Simular</button>
     </div>
-    <canvas id="grafico1" width="800" height="400"></canvas>
+    <canvas class="grafico" id="grafico1" width="800" height="400"></canvas>
     <div class="results" id="results1"></div>
 
     <div class="container">
         <label for="distancia">Distancia (m):</label>
         <br>
-        <input type="number" id="distancia" step="0.1"><br>
+        <input class="int_inputs" type="number" id="distancia" step="0.1"><br>
 
         <label for="tiempo2">Tiempo (s):</label>
         <br>
-        <input type="number" id="tiempo2" step="0.1"><br>
+        <input class="int_inputs" type="number" id="tiempo2" step="0.1"><br>
 
         <button onclick="simularMRU('grafico2', 'distancia', 'tiempo2', 'Velocidad (m/s)')">Simular</button>
     </div>
-    <canvas id="grafico2" width="800" height="400"></canvas>
+    <canvas class="grafico" id="grafico2" width="800" height="400"></canvas>
     <div class="results" id="results2"></div>
 
     <script>

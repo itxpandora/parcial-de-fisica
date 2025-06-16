@@ -19,7 +19,6 @@ h1, h3 {
     color: #2c3e50;
 }
 
-/* CONTENEDOR UNIFICADO */
 .container {
     background-color: white;
     padding: 30px;
@@ -33,7 +32,6 @@ h1, h3 {
     align-items: center;
 }
 
-/* FORMULARIOS */
 form {
     width: 100%;
     max-width: 400px;
@@ -86,7 +84,6 @@ input:focus,
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* BOTONES */
 .buttons {
     margin-top: 20px;
     text-align: center;
@@ -112,7 +109,6 @@ button:hover {
     background-color: #2980b9;
 }
 
-/* BOTÓN VOLVER */
 .volver {
     position: absolute;
     top: 20px;
@@ -132,7 +128,6 @@ button:hover {
     background-color: #c0392b;
 }
 
-/* CANVAS */
 canvas {
     display: block;
     margin: 20px auto;
@@ -140,7 +135,6 @@ canvas {
     background-color: #fff;
 }
 
-/* RESULTADOS */
 .results {
     text-align: center;
     font-size: 18px;
@@ -148,7 +142,6 @@ canvas {
     margin-top: 20px;
 }
 
-/* VISUALIZACIÓN */
 .road {
     width: 90%;
     height: 14px;
@@ -189,4 +182,19 @@ canvas {
     margin-top: 20px;
     font-size: 18px;
     color: #2d3436;
+}
+
+.grafico {
+    display: block;
+    margin: 30px auto;
+    border: 2px solid #2c3e50;
+    background-color: #ecf0f1;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.grafico:hover {
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    transform: scale(1.01);
 }
